@@ -46,20 +46,24 @@ Reading computer vision research papers is challenging. Papers are dense with te
 
 Existing solutions like ChatGPT and Claude have limitations:
 
-- Require internet connection
-- Don't have access to latest papers or your private paper library
-- Can hallucinate information not present in the papers
-- Don't provide proper citations to source material
+- **Context Window Limits**: Cannot process large document collections at once. Even with 128k token context windows, you can't upload dozens of papers simultaneously. This forces you to repeatedly upload subsets of papers, making cross-paper comparisons difficult.
+- **Hallucinations**: When you do upload documents, models may generate plausible-sounding information that isn't actually in the papers, especially when context limits force you to truncate content.
+- **No Incremental Knowledge**: Each conversation starts fresh. You can't build a persistent library that grows over time.
+- **Internet Dependency**: Require active connection and API access.
+- **Privacy Concerns**: Your papers are sent to external servers.
+- **No Source Citations**: Don't provide specific page numbers or reliable references to source material.
 
-paperRAG solves these problems by creating a local knowledge base from your PDF papers, using semantic search to find relevant passages, and generating answers with a local language model while citing specific sources.
+paperRAG solves these problems with a RAG (Retrieval-Augmented Generation) approach: it creates a local, searchable knowledge base from unlimited PDFs, retrieves only the most relevant passages for each question (fitting within context limits), and generates answers with precise source citations.
 
 ## Features
 
-- **Fully Offline**: All processing and inference runs locally. No API keys, no internet required.
-- **Semantic Search**: Uses sentence embeddings (all-mpnet-base-v2) to find relevant passages across your paper library.
-- **Source Citations**: Every answer includes references to specific papers and page numbers.
-- **Incremental Indexing**: Add new papers without re-processing your entire library.
-- **Adaptive Context**: Dynamically selects relevant chunks based on token budget to avoid overflow.
+- **Unlimited Document Library**: Index hundreds of papers without context window limits. RAG retrieves only the most relevant passages for each question, so you're never constrained by model context size.
+- **No Hallucinations from Truncation**: Unlike uploading truncated documents to ChatGPT, RAG ensures the model only sees complete, relevant passages retrieved from your full library.
+- **Fully Offline**: All processing and inference runs locally. No API keys, no internet required. Your papers stay private.
+- **Semantic Search**: Uses sentence embeddings (all-mpnet-base-v2) to find relevant passages across your entire paper library, no matter how large.
+- **Precise Source Citations**: Every answer includes references to specific papers and page numbers, eliminating hallucination concerns.
+- **Persistent Knowledge Base**: Build your library incrementally over time. Each new paper enriches your searchable knowledge without re-processing.
+- **Adaptive Context**: Dynamically selects the most relevant chunks to fit within token budget, maximizing information density.
 - **Multiple Models**: Choose between TinyLlama (fast, 1-2 min) or Qwen (high quality, GPU recommended).
 - **Quantization Support**: Optional 8-bit quantization for 2x faster inference with minimal quality loss.
 - **Interactive Mode**: Ask multiple questions in a single session without reloading the model.
