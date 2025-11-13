@@ -26,7 +26,8 @@ env/
 ENV/
 
 # Data and Models (user-generated, not for GitHub)
-data/
+# Note: On example-cv-papers branch, we DO include data/papers/ for demo
+data/vector_db/
 models/
 
 # IDE
