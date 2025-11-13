@@ -130,28 +130,26 @@ class AnswerGenerator:
         if not self._is_loaded:
             raise RuntimeError("Model not loaded! Call load_model() first.")
 
-        # Build the prompt with strict instructions
-        # Strategy 2: Example-driven (works best for TinyLlama and other small models)
-        system_prompt = """You are a research assistant analyzing computer vision papers.
+        # Build the prompt - Focus on clear, comprehensive answers
+        system_prompt = """You are a helpful research assistant that explains computer vision concepts clearly and thoroughly.
 
-CITATION FORMAT: (Paper ID: X, Page: Y)
+Your goal: Provide comprehensive, easy-to-understand answers based on the provided research papers.
 
-Example:
-Q: What is ViT?
-A: ViT is Vision Transformer (Paper ID: 2, Page: 3). It uses patches (Paper ID: 2, Page: 3).
+Guidelines:
+- Use simple, clear language that's easy to understand
+- Explain technical terms when you use them
+- Be thorough - include key details, numbers, and results from the papers
+- Structure your answer logically (overview → details → results)
+- If the context doesn't have enough information, say so honestly
+- Focus on being helpful and informative"""
 
-RULES:
-- Put citations after EVERY fact
-- Use format: (Paper ID: X, Page: Y)
-- NO answers without citations
-- Answer ONLY from the context provided"""
+        user_prompt = f"""Based on these research papers:
 
-        user_prompt = f"""Context:
 {context}
 
 Question: {question}
 
-Answer with citations after every fact:"""
+Provide a clear, comprehensive answer:"""
 
         # Format messages for chat models
         messages = [
@@ -224,27 +222,26 @@ Answer with citations after every fact:"""
             raise RuntimeError("Model not loaded! Call load_model() first.")
 
         # Build prompt (same as generate_answer)
-        # Strategy 2: Example-driven (works best for TinyLlama and other small models)
-        system_prompt = """You are a research assistant analyzing computer vision papers.
+        # Focus on clear, comprehensive answers
+        system_prompt = """You are a helpful research assistant that explains computer vision concepts clearly and thoroughly.
 
-CITATION FORMAT: (Paper ID: X, Page: Y)
+Your goal: Provide comprehensive, easy-to-understand answers based on the provided research papers.
 
-Example:
-Q: What is ViT?
-A: ViT is Vision Transformer (Paper ID: 2, Page: 3). It uses patches (Paper ID: 2, Page: 3).
+Guidelines:
+- Use simple, clear language that's easy to understand
+- Explain technical terms when you use them
+- Be thorough - include key details, numbers, and results from the papers
+- Structure your answer logically (overview → details → results)
+- If the context doesn't have enough information, say so honestly
+- Focus on being helpful and informative"""
 
-RULES:
-- Put citations after EVERY fact
-- Use format: (Paper ID: X, Page: Y)
-- NO answers without citations
-- Answer ONLY from the context provided"""
+        user_prompt = f"""Based on these research papers:
 
-        user_prompt = f"""Context:
 {context}
 
 Question: {question}
 
-Answer with citations after every fact:"""
+Provide a clear, comprehensive answer:"""
 
         messages = [
             {"role": "system", "content": system_prompt},

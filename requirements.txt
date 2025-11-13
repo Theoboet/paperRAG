@@ -10,6 +10,8 @@ chromadb>=0.4.0  # Vector database for semantic search
 # LLM Inference
 # llama-cpp-python>=0.2.0  # Local LLM inference with llama.cpp (requires C++ build tools)
 # Alternative: use transformers with CPU inference or install pre-built wheel later
+bitsandbytes>=0.41.0  # Model quantization (8-bit, 4-bit) for faster inference
+accelerate>=0.20.0  # Required for bitsandbytes integration
 
 # Database
 # sqlite3 is included in Python standard library

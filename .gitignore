@@ -25,12 +25,9 @@ venv/
 env/
 ENV/
 
-# Data and Models
-data/papers/*.pdf
-data/vector_db/
-data/*.db
-models/*.gguf
-models/*.bin
+# Data and Models (user-generated, not for GitHub)
+data/
+models/
 
 # IDE
 .vscode/
@@ -54,3 +51,27 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Development documentation (internal notes, not for users)
+project.md
+PHASE_2.3_CHALLENGES.md
+STEPS_1-3_SUMMARY.md
+TINYLLAMA_RESULTS.md
+
+# Test and development scripts (not needed by end users)
+scripts/test_*.py
+scripts/check_download_progress.py
+scripts/simple_progress.py
+scripts/process_all_papers.py
+scripts/search_papers.py
+
+# Development artifacts
+main.py
+nul
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Claude Code configuration
+.claude/

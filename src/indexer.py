@@ -81,9 +81,9 @@ class VectorIndexer:
             metadata={"hnsw:space": "cosine"}
         )
 
-        # Load embedding model
+        # Load embedding model (offline mode - use cached model only)
         print("Loading embedding model...")
-        self.model = SentenceTransformer('all-mpnet-base-v2')
+        self.model = SentenceTransformer('all-mpnet-base-v2', local_files_only=True)
         print("Embedding model loaded successfully!")
 
     def index_chunks(self, chunks: List[Dict]):
